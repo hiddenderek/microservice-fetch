@@ -1,0 +1,79 @@
+definitions:
+  models.Item:
+    properties:
+      price:
+        type: string
+      shortDescription:
+        type: string
+    required:
+    - price
+    - shortDescription
+    type: object
+  models.Receipt:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/models.Item'
+        type: array
+      purchaseDate:
+        type: string
+      purchaseTime:
+        type: string
+      retailer:
+        type: string
+      total:
+        type: string
+    required:
+    - items
+    - purchaseDate
+    - purchaseTime
+    - retailer
+    - total
+    type: object
+info:
+  contact: {}
+paths:
+  /receipts/{id}/points:
+    get:
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Calculate points for a receipt
+      tags:
+      - receipts
+  /receipts/process:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Receipt Data
+        in: body
+        name: receipt
+        required: true
+        schema:
+          $ref: '#/definitions/models.Receipt'
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Process a receipt
+      tags:
+      - receipts
+swagger: "2.0"

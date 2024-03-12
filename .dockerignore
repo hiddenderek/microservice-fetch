@@ -1,0 +1,9 @@
+docker-compose-dev.yml
+docker-compose-prod.yml
+docker-compose.yml
+Dockerfile
+.dockerignore
+.git
+.gitignore
+
+fetch-service
