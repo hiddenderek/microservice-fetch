@@ -38,7 +38,7 @@ func processReceipts(c *gin.Context) {
 // @Summary      Calculate points for a receipt
 // @Tags         receipts
 // @Produce      json
-// @Param        id   path      string  true  "Account ID"
+// @Param        id   path      string  true  "Receipt Id"
 // @Failure      400
 // @Failure      404
 // @Failure      500
