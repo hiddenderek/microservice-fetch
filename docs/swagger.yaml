@@ -36,7 +36,7 @@ paths:
   /receipts/{id}/points:
     get:
       parameters:
-      - description: Account ID
+      - description: Receipt Id
         in: path
         name: id
         required: true

@@ -63,7 +63,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Account ID",
+                        "description": "Receipt Id",
                         "name": "id",
                         "in": "path",
                         "required": true

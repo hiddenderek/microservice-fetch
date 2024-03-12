@@ -129,7 +129,7 @@ func scorePurchaseTime(timeString string) int {
 	if err != nil {
 		// this should not happen
 		fmt.Println("Error parsing minute", err)
-		panic("Error parsing hour")
+		panic("Error parsing minute")
 	}
 	adjHour := hour - 12
 	// Check the hours and minutes. Has to be in between 2 and 4.

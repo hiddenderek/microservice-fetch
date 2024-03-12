@@ -47,7 +47,7 @@ func getPoints(c *gin.Context) {
 	defer func() {
 		// handle any panics that might happen due to badly formatted data
 		if r := recover(); r != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": r})
+			c.JSON(http.StatusBadRequest, gin.H{"Malformed Data Error": r})
 		}
 	}()
 	name := c.Param("id")
