@@ -37,7 +37,7 @@ func processReceipts(c *gin.Context) {
 		}
 	}()
 	res := service.PostReceipt(req)
-	c.JSON(200, res)
+	c.JSON(http.StatusCreated, res)
 }
 
 // getPoints godoc
