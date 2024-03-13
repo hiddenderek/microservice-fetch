@@ -13,7 +13,7 @@ func TestAccumulatePointsName(t *testing.T) {
 		Total:        "2.31419",
 		Items:        []models.Item{},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 15 {
 		t.Fatalf(`Must be equal to 15`)
 	}
@@ -27,7 +27,7 @@ func TestAccumulatePointsNameNonAlphaNumeric(t *testing.T) {
 		Total:        "2.31419",
 		Items:        []models.Item{},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 15 {
 		t.Fatalf(`Must be equal to 15`)
 	}
@@ -41,7 +41,7 @@ func TestAccumulatePointsTotalRandom(t *testing.T) {
 		Total:        "2.31419",
 		Items:        []models.Item{},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 9 {
 		t.Fatalf(`Must be equal to 9`)
 	}
@@ -55,7 +55,7 @@ func TestAccumulatePointsTotalQuarter(t *testing.T) {
 		Total:        "2.25",
 		Items:        []models.Item{},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 34 {
 		t.Fatalf(`Must be equal to 34`)
 	}
@@ -69,7 +69,7 @@ func TestAccumulatePointsTotalWhole(t *testing.T) {
 		Total:        "2",
 		Items:        []models.Item{},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 84 {
 		t.Fatalf(`Must be equal to 84`)
 	}
@@ -83,7 +83,7 @@ func TestNotAccumulatePointsOneItem(t *testing.T) {
 		Total:        "2",
 		Items:        []models.Item{{ShortDescription: "Pepsi - 12-oz", Price: "1.25"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 84 {
 		t.Fatalf(`Must be equal to 84`)
 	}
@@ -99,7 +99,7 @@ func TestAccumulatePointsTwoItems(t *testing.T) {
 			{ShortDescription: "Pepsi - 12-oz", Price: "1.25"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 89 {
 		t.Fatalf(`Must be equal to 89`)
 	}
@@ -118,7 +118,7 @@ func TestAccumulatePointsFiveItems(t *testing.T) {
 			{ShortDescription: "coke", Price: "1.40"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 94 {
 		t.Fatalf(`Must be equal to 94`)
 	}
@@ -137,7 +137,7 @@ func TestAccumulatePurchaseDateOdd(t *testing.T) {
 			{ShortDescription: "coke", Price: "1.40"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 100 {
 		t.Fatalf(`Must be equal to 100`)
 	}
@@ -156,7 +156,7 @@ func TestAccumulatePurchaseTime(t *testing.T) {
 			{ShortDescription: "coke", Price: "1.40"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 110 {
 		t.Fatalf(`Must be equal to 110`)
 	}
@@ -175,7 +175,7 @@ func TestAccumulatePurchaseTimeExactlyTwo(t *testing.T) {
 			{ShortDescription: "coke", Price: "1.40"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 100 {
 		t.Fatalf(`Must be equal to 100`)
 	}
@@ -194,7 +194,7 @@ func TestAccumulatePurchaseTimeExactlyThree(t *testing.T) {
 			{ShortDescription: "coke", Price: "1.40"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 110 {
 		t.Fatalf(`Must be equal to 110`)
 	}
@@ -213,7 +213,7 @@ func TestAccumulateReceiptPrices(t *testing.T) {
 			{ShortDescription: "coke", Price: "1.40"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 111 {
 		t.Fatalf(`Must be equal to 111`)
 	}
@@ -232,7 +232,7 @@ func TestAccumulateReceiptPricesTrimmed(t *testing.T) {
 			{ShortDescription: "  Coke is cool  ", Price: "1.40"},
 			{ShortDescription: "coke", Price: "1.40"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 112 {
 		t.Fatalf(`Must be equal to 112`)
 	}
@@ -251,7 +251,7 @@ func TestProvidedExample1(t *testing.T) {
 			{ShortDescription: "Doritos Nacho Cheese", Price: "3.35"},
 			{ShortDescription: "   Klarbrunn 12-PK 12 FL OZ  ", Price: "12.00"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 28 {
 		t.Fatalf(`Must be equal to 28`)
 	}
@@ -269,7 +269,7 @@ func TestProvidedExample2(t *testing.T) {
 			{ShortDescription: "Gatorade", Price: "2.25"},
 			{ShortDescription: "Gatorade", Price: "2.25"}},
 	}
-	score := accumulatePoints(testData)
+	score, _ := accumulatePoints(testData)
 	if score != 109 {
 		t.Fatalf(`Must be equal to 109`)
 	}

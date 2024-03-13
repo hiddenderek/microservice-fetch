@@ -10,7 +10,7 @@ type Receipt struct {
 	PurchaseDate string `json:"purchaseDate" binding:"required"`
 	PurchaseTime string `json:"purchaseTime" binding:"required"`
 	Total        string `json:"total" binding:"required,numeric"`
-	Items        []Item `json:"items" binding:"required"`
+	Items        []Item `json:"items" binding:"required,dive"`
 }
 
 type IdResponse struct {

@@ -30,6 +30,12 @@ func processReceipts(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"Validation Errors": fmt.Sprintf("%v", err)})
 		return
 	}
+	defer func() {
+		// handle any unforseen panics
+		if r := recover(); r != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"Unknown Error": r})
+		}
+	}()
 	res := service.PostReceipt(req)
 	c.JSON(200, res)
 }
@@ -45,17 +51,22 @@ func processReceipts(c *gin.Context) {
 // @Router 		 /receipts/{id}/points [get]
 func getPoints(c *gin.Context) {
 	defer func() {
-		// handle any panics that might happen due to badly formatted data
+		// handle any unforseen panics
 		if r := recover(); r != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"Malformed Data Error": r})
+			c.JSON(http.StatusInternalServerError, gin.H{"Unknown Error": r})
 		}
 	}()
 	name := c.Param("id")
-	var item, ok = service.GetPoints(name)
-	if ok {
-		c.IndentedJSON(http.StatusOK, item)
-	} else {
-		c.IndentedJSON(http.StatusNotFound, nil)
+	var item, err, ok = service.GetPoints(name)
+	if err != nil {
+		// handle any returned errors
+		c.JSON(http.StatusBadRequest, gin.H{"Malformed Data Error": err.Error()})
+	} else if !ok {
+		// handle 404 errors
+		c.JSON(http.StatusNotFound, gin.H{"Not Found Error": "Could Not Find Points"})
+	} else if ok {
+		// return score if nothing is wrong
+		c.JSON(http.StatusOK, item)
 	}
 
 }
